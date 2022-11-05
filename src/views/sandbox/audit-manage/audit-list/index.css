@@ -1,0 +1,9 @@
+.demo-loadmore-list {
+    min-height: 350px;
+  }
+  .ant-list-item-meta {
+    display: flex;
+    flex: 1 1;
+    align-items: flex-start;
+    max-width: 500px;
+}

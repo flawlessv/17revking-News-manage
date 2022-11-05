@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "xiugai1111",
+      "author": "typicode"
+    },
+    {
+      "title": "zsw",
+      "author": "qy",
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "1 comment",
+      "postId": 1
+    },
+    {
+      "id": 1,
+      "body": "2 comment",
+      "postId": 2
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

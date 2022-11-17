@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 const { confirm } = Modal
 export default function NewsDraft() {
   const [dataSource, setDataSource] = useState([])
-  const { username } = JSON.parse(localStorage.getItem('token'))[0]
+  const { username } = JSON.parse(localStorage.getItem('token'))
   const navigate = useNavigate()
   useEffect(() => {
     axios.get(`/news?author=${username}&auditState=0&_expand=category`).then(res => {

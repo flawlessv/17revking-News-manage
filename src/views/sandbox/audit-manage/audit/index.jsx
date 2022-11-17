@@ -8,7 +8,7 @@ import axios from 'axios';
 const { confirm } = Modal
 export default function Audit() {
   const [dataSource, setDataSource] = useState([])
-  const { roleId, author, region } = JSON.parse(localStorage.getItem('token'))[0]
+  const { roleId, author, region } = JSON.parse(localStorage.getItem('token'))
   useEffect(() => {
     axios.get('/news?auditState=1&_expand=category').then(res => {
       console.log(res.data);

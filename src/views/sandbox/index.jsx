@@ -19,8 +19,8 @@ function SandBox(props) {
         <Content
           className="site-layout-background"
           style={{
-            margin: '24px 16px',
-            padding: 24,
+            margin: '14px 12px',
+            padding: '14px 14px 0',
             minHeight: 280,
             overflow: 'auto'
           }}

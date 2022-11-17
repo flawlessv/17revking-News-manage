@@ -15,22 +15,26 @@ const Userlist = () => {
   const [editId, setEditId] = useState(0);
   const [form] = Form.useForm();
   const [upForm] = Form.useForm();
-  const { username, region, roleId } = JSON.parse(localStorage.getItem('token'))[0]
+  const { username, region, roleId } = JSON.parse(localStorage.getItem('token'))
+  // 设置表格数据
   useEffect(() => {
     axios.get('/users?_expand=role').then(res => {
       const list = res.data
+      console.log(res.data);
       // 超级管理员可以看到所有用户，区域管理员只能看到自己和同区域的区域编辑 
-      setDataSource(roleId == 1 ? list : [
-        ...list.filter(item => item.username == username),
-        ...list.filter(item => item.region == region && item.roleId == 3)
+      setDataSource(roleId * 1 === 1 ? list : [
+        ...list.filter(item => item.username === username),
+        ...list.filter(item => item.region === region && item.roleId * 1 === 3)
       ])
     })
-  }, [])
+  }, [username, region, roleId])
+  // 获取区域数据
   useEffect(() => {
     axios.get('/regions').then(res => {
       setRegions(res.data)
     })
   }, [])
+  // 获取角色数据
   useEffect(() => {
     axios.get('/roles').then(res => {
       setRoles(res.data)
@@ -42,14 +46,12 @@ const Userlist = () => {
     axios.delete(`/users/${value.id}`)
   };
   const onCreate = (values) => {
-    console.log('Received values of form: ', values);
     setOpen(false);
     axios.post('/users', {
       ...values,
       "roleState": true,
       "default": false
     }).then(res => {
-      console.log(roles);
       setDataSource([...dataSource, {
         ...res.data,
         role: roles.find(item => item.id === values.roleId * 1)
@@ -75,22 +77,16 @@ const Userlist = () => {
       }))
     })
   };
-  const onCancel = (values) => {
+  const onCancel = () => {
     setOpen(false);
   };
-  const upOnCancel = (values) => {
+  const upOnCancel = () => {
     setEditOpen(false);
   };
   const confirm = (record) => {
     message.success('删除成功！');
     handleDelete(record)
   };
-
-  const cancel = (e) => {
-    console.log(e);
-    message.error('Click on No');
-  };
-
   const changeUserState = (State, item) => {
     axios.patch(`/users/${item.id}`, {
       roleState: !State
@@ -99,7 +95,7 @@ const Userlist = () => {
     setDataSource([...dataSource])
   }
   const RisDIsable = (item) => {
-    if (roleId == 1) {
+    if (roleId * 1 === 1) {
       return false
     } else {
       return item.value !== region
@@ -107,7 +103,7 @@ const Userlist = () => {
   }
   const RoisDIsable = (item) => {
 
-    if (roleId == 1) {
+    if (roleId * 1 === 1) {
       return false
     } else {
       return item.id !== 3
@@ -117,28 +113,32 @@ const Userlist = () => {
     {
       title: '区域',
       dataIndex: 'region',
-      width: '30%',
-      editable: true,
-      render: (region) => <b>{region === '' ? '全球' : region}</b>
+      align:'center',
+      render: (region) => <b>{region === '' ? '全球' : region}</b>,
+      
     },
     {
       title: '角色名称',
       dataIndex: 'role',
+      align:'center',
       render: (role) => role?.roleName
     },
     {
       title: '用户名',
       dataIndex: 'username',
+      align:'center',
     },
     {
       title: '用户状态',
       dataIndex: 'roleState',
+      align:'center',
       render: (roleState, record) => <Switch checkedChildren="开启" unCheckedChildren="关闭" checked={roleState} disabled={record.default} onChange={() => changeUserState(roleState, record)} />
     },
 
     {
       title: '操作',
       dataIndex: 'operation',
+      align:'center',
       render: (_, record) =>
         <Space>
           <Button shape="circle" type="primary" icon={<FormOutlined />} disabled={record.default} onClick={() => {
@@ -149,7 +149,6 @@ const Userlist = () => {
           <Popconfirm
             title="Are you sure to delete this role?"
             onConfirm={() => confirm(record)}
-            onCancel={cancel}
             okText="Yes"
             cancelText="No"
           >
@@ -405,7 +404,7 @@ const Userlist = () => {
         新增用户
       </Button>
       <Table
-
+        columns
         rowClassName={() => 'editable-row'}
         bordered
         dataSource={dataSource}

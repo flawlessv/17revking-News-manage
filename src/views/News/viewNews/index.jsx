@@ -6,7 +6,6 @@ export default function ViewNews() {
     const [list, setList] = useState([])
     useEffect(() => {
         axios.get('/news?publishState=2&_expand=category').then(res => {
-            console.log(Object.entries(_.groupBy(res.data, item => item.category.title)));
             setList(Object.entries(_.groupBy(res.data, item => item.category.title)))
         })
     }, [])
@@ -17,7 +16,7 @@ export default function ViewNews() {
         }}>
             <PageHeader
                 className="site-page-header"
-                title="17revking News-manage"
+                title="凡思美育 News-manage"
                 subTitle={'^^'}
             />
             <div className="site-card-wrapper">

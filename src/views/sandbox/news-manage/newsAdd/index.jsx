@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { PageHeader, Steps, Button, message, Form, Select, Input,notification  } from 'antd';
+import { PageHeader, Steps, Button, message, Form, Select, Input, notification } from 'antd';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from 'draftjs-to-html';
@@ -15,14 +15,13 @@ export default function NewsAdd() {
   const [editorState, setEditorState] = useState();
   const [formInfo, setFormInfo] = useState({});
   const [content, setContent] = useState({});
-  const User=JSON.parse(localStorage.getItem('token'))[0]
+  const User = JSON.parse(localStorage.getItem('token'))
   useEffect(() => {
     axios.get('/categories').then(res => {
       setCategoryList(res.data)
     })
-    console.log(User);
   }, [])
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const formRef = React.createRef();
   // 表单布局
   const layout = {
@@ -51,20 +50,19 @@ export default function NewsAdd() {
   const openNotification = (auditState) => {
     const args = {
       message: '秋一提示',
-      description:`${auditState===0?'保存':'提交'}成功!即将跳转到${auditState===0?'草稿箱':'审核列表'}页面`,
+      description: `${auditState === 0 ? '保存' : '提交'}成功!即将跳转到${auditState === 0 ? '草稿箱' : '审核列表'}页面`,
       duration: 2,
     };
     notification.open(args);
     setTimeout(() => {
-      auditState===0?navigate('/news-manage/draft'):navigate('/audit-manage/list')
+      auditState === 0 ? navigate('/news-manage/draft') : navigate('/audit-manage/list')
     }, 1500);
   };
   const handleSave = (auditState) => {
-    console.log(formInfo, content);
     axios.post('/news', {
       ...formInfo,
       "content": content,
-      "region": User.region?User.region:"全球",
+      "region": User.region ? User.region : "全球",
       "author": User.username,
       "roleId": User.roleId,
       "auditState": auditState,
@@ -72,7 +70,7 @@ export default function NewsAdd() {
       "createTime": Date.now(),
       "star": 0,
       "view": 0,
-    }).then(()=>{
+    }).then(() => {
       openNotification(auditState)
     })
   }
@@ -107,7 +105,6 @@ export default function NewsAdd() {
               placeholder="选择新闻分类"
               allowClear
             >
-
               {
                 categoryList.map(item => <Option values={item.id} key={item.id}>{item.title}</Option>)
               }
@@ -126,7 +123,6 @@ export default function NewsAdd() {
         editorClassName="editorClassName"
         onEditorStateChange={(editorState) => { setEditorState(editorState) }}
         onBlur={() => {
-          console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
           setContent(draftToHtml(convertToRaw(editorState.getCurrentContent())))
         }}
       />,
@@ -134,8 +130,7 @@ export default function NewsAdd() {
     {
       title: '新闻提交',
       description: '保存草稿或提交审核',
-      content: 'last-content',
-
+      content: '撰写完成，请提交审核或保存草稿吧！',
     },
   ];
   return (

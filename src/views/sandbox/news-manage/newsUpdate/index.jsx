@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PageHeader, Steps, Button, message, Form, Select, Input, notification } from 'antd';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from "react-draft-wysiwyg";
@@ -16,16 +16,14 @@ export default function NewsAdd() {
     const [editorState, setEditorState] = useState();
     const [formInfo, setFormInfo] = useState({});
     const [content, setContent] = useState({});
-    const User = JSON.parse(localStorage.getItem('token'))[0]
     const { id } = useParams()
     const navigate = useNavigate()
-    const formRef = React.createRef();
+    const formRef = useRef();
     //   获取新闻分类
     useEffect(() => {
         axios.get('/categories').then(res => {
             setCategoryList(res.data)
         })
-        console.log(User);
     }, [])
     //设置之前的新闻内容
     useEffect(() => {

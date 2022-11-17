@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 const { Header } = Layout;
 function TopHeader(props) {
   const navigate = useNavigate()
-  const { username, role: { roleName } } = JSON.parse(localStorage.getItem('token'))[0]
+  const { username, role: { roleName } } = JSON.parse(localStorage.getItem('token'))
   const changeCollapsed = () => {
     props.changeisCollapsed()
   }
@@ -66,12 +66,12 @@ const mapStateToProps = (state) => {
   return state
 }
 const mapDispatchToProps = (dispatch) => {
-return {
-  changeisCollapsed:()=>{
-    dispatch({
-      type:'change_isCollapsed'
-    })
+  return {
+    changeisCollapsed: () => {
+      dispatch({
+        type: 'change_isCollapsed'
+      })
+    }
   }
-}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TopHeader)

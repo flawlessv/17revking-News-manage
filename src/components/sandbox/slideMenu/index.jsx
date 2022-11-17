@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 const { Sider } = Layout;
-const { Text } = Typography;
+const { Title } = Typography;
 
 function SlideMenu(props) {
   function getItem(label, key, icon, children, type) {
@@ -24,7 +24,7 @@ function SlideMenu(props) {
     };
   }
 
-  const { role: { rights } } = JSON.parse(localStorage.getItem('token'))[0]
+  const { role: { rights } } = JSON.parse(localStorage.getItem('token'))
   //检查item是否应该渲染在侧边栏
   const checkItems = (item) => {
     return item.pagepermisson === 1 && rights.includes(item.key)
@@ -77,13 +77,13 @@ function SlideMenu(props) {
     navigate(item.key)
   }
   return (
-    <Sider trigger={null} collapsible collapsed={props.collapsedReducer}>
+    <Sider trigger={null} collapsible collapsed={props.collapsedReducer} theme="light">
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <div className="logo" >
-          <Text type="success" strong>17revking</Text></div>
+        <Title level={5} style={{margin:'20px',color:'#FF5F95',fontFamily:'YouYuan'}}>凡思美育后台管理</Title></div>
         <div style={{ flex: 1, overflow: 'auto' }} >
           <Menu
-            theme='dark'
+            theme='light'
             onClick={changeRouter}
             style={{
               width: '100%',

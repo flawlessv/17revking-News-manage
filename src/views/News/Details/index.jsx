@@ -13,7 +13,6 @@ const Details = () => {
     const { id } = useParams()
     useEffect(() => {
         axios.get(`/news/${id}?&_expand=category&_expand=role`).then(res => {
-            console.log(res.data);
             setLikes(res.data.star);
             setNewsInfo({...res.data,view:res.data.view+1})
             return res.data

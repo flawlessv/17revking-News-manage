@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Table, Button, Space, Modal, Tree } from 'antd'
 import { OrderedListOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons'
 import axios from 'axios'
-import { IndexHome } from '../../../../router/indexHome'
 export default function RoleList() {
   const [dataSource, setDataSource] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +33,8 @@ export default function RoleList() {
       title: 'Option',
       render: (item) =>
         <Space>
-          <Button shape="circle" type="danger" icon={<DeleteOutlined />} onClick={() => showDeleteConfirm(item)}></Button>
+          <Button shape="circle" type="danger" icon={<DeleteOutlined />} onClick={() =>showDeleteConfirm(item)
+          }></Button>
           <Button shape="circle" type="primary" icon={<OrderedListOutlined onClick={() => {
             showModal()
             setCheckedKeys(item.rights)
@@ -102,7 +102,6 @@ export default function RoleList() {
         />
       </Modal>
       <Table dataSource={dataSource} columns={columns} rowKey={(item) => item.id} />
-      {/* <IndexHome /> */}
     </div>
   )
 }

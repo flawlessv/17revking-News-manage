@@ -17,7 +17,7 @@ const Login = () => {
         message.error('登录失败')
       }
       else {
-        localStorage.setItem("token", JSON.stringify(res.data))
+        localStorage.setItem("token", JSON.stringify(res.data[0]))
         setTimeout(() => {
           message.success('登陆成功')
           navigate('/')
@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <>
       <div className="my-login-box">
-        <h2>17revking登录</h2>
+        <h2>凡思美育后台登录</h2>
         <div>
           <div className="user-box">
             <input type="text" name="username" required="" />

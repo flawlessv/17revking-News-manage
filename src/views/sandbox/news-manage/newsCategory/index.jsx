@@ -1,4 +1,4 @@
-import { Button, Form, Input, Popconfirm, Table } from 'antd';
+import { Form, Input, Popconfirm, Table } from 'antd';
 import axios from 'axios';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import './index.css'
@@ -81,12 +81,9 @@ const EditableCell = ({
 };
 const NewsCategory = () => {
   const [dataSource, setDataSource] = useState([]);
-  const [count, setCount] = useState(2);
   useEffect(() => {
     axios.get('/categories').then(res => {
-      console.log(res.data);
       setDataSource(res.data)
-      count = res.data.length + 1
     })
   }, [])
   const handleDelete = (key) => {
@@ -153,7 +150,6 @@ const NewsCategory = () => {
     };
   });
   return (
-
     <Table
       components={components}
       rowClassName={() => 'editable-row'}

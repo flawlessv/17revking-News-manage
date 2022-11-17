@@ -1,0 +1,15 @@
+.eRef{
+    height:300px;
+    margin-top:30px;
+    background-color:rgba(238, 184, 195, .1);
+    padding:20px 20px 0;
+    border-radius: 8px;
+}
+.pieRef{
+    height: 400px;
+    margin-top: 40px;
+}
+.lRef{
+    height: 235px;
+    width: 100%;
+}

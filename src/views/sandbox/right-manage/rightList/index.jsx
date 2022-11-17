@@ -83,10 +83,6 @@ export default function RightList() {
           axios.delete(`/children/${item.id}`)
         }
       },
-
-      onCancel() {
-        console.log('Cancel');
-      },
     });
   };
   const changeSwitch = (item) => {

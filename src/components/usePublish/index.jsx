@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { message } from 'antd'
 export default function UsePublish(props) {
-    const { username } = JSON.parse(localStorage.getItem('token'))[0]
+    const { username } = JSON.parse(localStorage.getItem('token'))
     const [dataSource, setDataSource] = useState()
     useEffect(() => {
         axios.get(`/news?author=${username}&publishState=${props}&_expand=category`).then(res => {

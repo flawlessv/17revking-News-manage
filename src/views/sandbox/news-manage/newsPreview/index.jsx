@@ -1,4 +1,5 @@
-import { Descriptions, PageHeader, Card } from 'antd';
+import { Descriptions, Card } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';

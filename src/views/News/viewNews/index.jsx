@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { PageHeader, Card, Col, Row, List } from 'antd';
+import {  Card, Col, Row, List } from 'antd';
+import { PageHeader } from '@ant-design/pro-layout';
 import axios from 'axios';
 import _ from 'lodash'
 export default function ViewNews() {

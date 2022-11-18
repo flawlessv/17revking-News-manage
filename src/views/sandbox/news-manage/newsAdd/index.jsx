@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {  Steps, Button, message, Form, Select, Input, notification } from 'antd';
+import { PageHeader, Steps, Button, message, Form, Select, Input, notification } from 'antd';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from 'draftjs-to-html';
-import { PageHeader } from '@ant-design/pro-layout';
 import { convertToRaw } from 'draft-js';
 import './index.css'
 import axios from 'axios';
@@ -134,18 +133,17 @@ export default function NewsAdd() {
       content: '撰写完成，请提交审核或保存草稿吧！',
     },
   ];
-  const items = steps.map((item) => ({
-    key: item.title,
-    title: item.title,
-  }));
   return (
     <div>
       <PageHeader
         className="site-page-header"
         title="撰写新闻"
       />
-      <>
-      <Steps current={current} items={items}/>
+      <Steps current={current}>
+        {steps.map((item) => (
+          <Step key={item.title} title={item.title} description={item.description} />
+        ))}
+      </Steps>
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
         {current < steps.length - 1 && (
@@ -176,7 +174,7 @@ export default function NewsAdd() {
           </Button>
         )}
       </div>
-      </>
+
     </div>
   )
 }

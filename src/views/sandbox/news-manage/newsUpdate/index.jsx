@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Steps, Button, message, Form, Select, Input, notification } from 'antd';
-import { PageHeader } from '@ant-design/pro-layout';
+import { PageHeader, Steps, Button, message, Form, Select, Input, notification } from 'antd';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -39,10 +38,9 @@ export default function NewsAdd() {
             const html = content;
             const contentBlock = htmlToDraft(html);
             if (contentBlock) {
-                const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-                const editorState = EditorState.createWithContent(contentState);
-                setEditorState(editorState)
-            }
+              const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+              const editorState = EditorState.createWithContent(contentState);
+             setEditorState(editorState)}
         })
     }, [])
     // 表单布局
@@ -156,10 +154,6 @@ export default function NewsAdd() {
 
         },
     ];
-    const items = steps.map((item) => ({
-        key: item.title,
-        title: item.title,
-    }));
     return (
         <div>
             <PageHeader
@@ -167,39 +161,41 @@ export default function NewsAdd() {
                 title="更新新闻"
                 onBack={() => navigate(-1)}
             />
-            <>
-                <Steps current={current} items={items} />
-                <div className="steps-content">{steps[current].content}</div>
-                <div className="steps-action">
-                    {current < steps.length - 1 && (
-                        <Button type="primary" onClick={() => next()}>
-                            下一步
+            <Steps current={current}>
+                {steps.map((item) => (
+                    <Step key={item.title} title={item.title} description={item.description} />
+                ))}
+            </Steps>
+            <div className="steps-content">{steps[current].content}</div>
+            <div className="steps-action">
+                {current < steps.length - 1 && (
+                    <Button type="primary" onClick={() => next()}>
+                        下一步
+                    </Button>
+                )}
+                {current === steps.length - 1 && (
+                    <span>
+                        <Button type="danger" onClick={() => handleSave(1)}>
+                            提交审核
                         </Button>
-                    )}
-                    {current === steps.length - 1 && (
-                        <span>
-                            <Button type="danger" onClick={() => handleSave(1)}>
-                                提交审核
-                            </Button>
-                            <Button type="primary" style={{
-                                margin: '0 0px 0 8px',
-                            }} onClick={() => handleSave(0)}>
-                                保存草稿
-                            </Button>
-                        </span>
-                    )}
-                    {current > 0 && (
-                        <Button
-                            style={{
-                                margin: '0 8px',
-                            }}
-                            onClick={() => prev()}
-                        >
-                            上一步
+                        <Button type="primary" style={{
+                            margin: '0 0px 0 8px',
+                        }} onClick={() => handleSave(0)}>
+                            保存草稿
                         </Button>
-                    )}
-                </div>
-            </>
+                    </span>
+                )}
+                {current > 0 && (
+                    <Button
+                        style={{
+                            margin: '0 8px',
+                        }}
+                        onClick={() => prev()}
+                    >
+                        上一步
+                    </Button>
+                )}
+            </div>
 
         </div>
     )

@@ -1,21 +1,13 @@
 import './App.less';
 import { useRoutes } from 'react-router-dom';
 import routes from './router/index'
-import { ConfigProvider } from 'antd';
+import { Fragment } from 'react';
 function App() {
-  const element = useRoutes(routes)
+  const element=useRoutes(routes)
   return (
-    <ConfigProvider
-      csp={{ nonce: 'YourNonceCode' }}
-      theme={{
-        token: {
-          colorPrimary: '#FF5F95',
-          fontFamily: 'serif'
-        },
-      }}
-    >
+    <Fragment>
       {element}
-    </ConfigProvider>
+    </Fragment>
   );
 }
 export default App;

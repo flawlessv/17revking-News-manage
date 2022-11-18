@@ -1,10 +1,9 @@
-import { Descriptions,  Card, message } from 'antd';
+import { Descriptions, PageHeader, Card, message } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState, createElement } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router';
 import { LikeFilled, LikeOutlined } from '@ant-design/icons';
-import { PageHeader } from '@ant-design/pro-layout';
 import './index.css'
 let starFlag = true;
 const Details = () => {

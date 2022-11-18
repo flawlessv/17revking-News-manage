@@ -50,7 +50,7 @@ function TopHeader(props) {
         props.collapsedReducer ? <MenuUnfoldOutlined onClick={changeCollapsed} /> : <MenuFoldOutlined onClick={changeCollapsed} />
       }
       <div style={{ float: 'right' }}> <span style={{ marginRight: '5px' }}>欢迎 <a>{username}</a> 回来</span>
-        <Dropdown menu={menu} overlayStyle={{ marginTop: '10px' }}>
+        <Dropdown overlay={menu} overlayStyle={{ marginTop: '10px' }}>
           <a onClick={(e) => e.preventDefault()}>
             <Space>
               <Avatar src="https://joeschmoe.io/api/v1/random" />
